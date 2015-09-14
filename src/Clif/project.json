@@ -1,0 +1,16 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Clif Class Library",
+  "authors": [ "rlgna" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  
+  "dependencies": {
+
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}

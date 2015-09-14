@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Clif.Sample": {
+      "commandName": "Clif.Sample",
+      "sdkVersion": "dnx-clr-win-x86.1.0.0-beta7"
+    }
+  }
+}
