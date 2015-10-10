@@ -8,8 +8,12 @@ namespace Clif
 {
     public class Clif
     {
-        public Clif()
+        public Func<Type, object> ActivatorFunction { get; set; }
+
+        public Clif(Func<Type, object> activatorFunction = null)
         {
+            ActivatorFunction = activatorFunction ?? Activator.CreateInstance;
+
             RegisterCommands();
         }
 
@@ -28,7 +32,7 @@ namespace Clif
         {
             foreach (var module in Modules)
             {
-                var instance = Activator.CreateInstance(module) as CommandModule;
+                var instance = ActivatorFunction.Invoke(module) as CommandModule;
                 Commands = instance.Commands;
             }
         }

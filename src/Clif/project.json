@@ -1,10 +1,10 @@
 ﻿{
-  "version": "1.0.0-*",
-  "description": "Clif Class Library",
-  "authors": [ "rlgna" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "version": "0.0.1-*",
+  "description": "Clif Command Line Framework for DNX commands",
+  "authors": [ "rlgnak" ],
+  "tags": [ "dnx", "commands", "cli" ],
+  "projectUrl": "https://github.com/rlgnak/Clif",
+  "licenseUrl": "https://github.com/rlgnak/Clif/blob/master/LICENSE",
   
   "dependencies": {
 
