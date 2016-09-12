@@ -1,25 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A35C1FA3-7BE3-4C46-BA3A-FF0F4F130DF1}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Clif", "src\Clif\Clif.xproj", "{95FFD5FE-576D-4A07-88A8-87A4EFA6DB86}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBD9DA3D-62DE-4156-AB65-F85427C29956}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Clif.Tests", "test\Clif.Tests\Clif.Tests.xproj", "{387FBF1A-0A73-4978-985E-0E3A41574F13}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1496DD54-2889-453D-9620-70F2EB68B7B8}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
-		NuGet.Config = NuGet.Config
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Clif", "src\Clif\Clif.xproj", "{7961DBAE-35FF-4D90-96DE-AAE83A593F85}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0050BE96-391A-4E86-B6BD-F203274FC96C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{792951D1-90F0-41C4-8D07-084ACED9DE61}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Clif.Sample", "sample\Clif.Sample\Clif.Sample.xproj", "{0F213AE2-0DF6-4386-9854-52CE3A238C72}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Clif.Tests", "test\Clif.Tests\Clif.Tests.xproj", "{1D78BEDE-6CAE-4F40-85D7-2552758F4EA0}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Clif.Sample", "sample\Clif.Sample\Clif.Sample.xproj", "{34E6FE4D-F44D-460F-90A6-EC7C69DEB9EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,25 +20,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7961DBAE-35FF-4D90-96DE-AAE83A593F85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7961DBAE-35FF-4D90-96DE-AAE83A593F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7961DBAE-35FF-4D90-96DE-AAE83A593F85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7961DBAE-35FF-4D90-96DE-AAE83A593F85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F213AE2-0DF6-4386-9854-52CE3A238C72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F213AE2-0DF6-4386-9854-52CE3A238C72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F213AE2-0DF6-4386-9854-52CE3A238C72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F213AE2-0DF6-4386-9854-52CE3A238C72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D78BEDE-6CAE-4F40-85D7-2552758F4EA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D78BEDE-6CAE-4F40-85D7-2552758F4EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D78BEDE-6CAE-4F40-85D7-2552758F4EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D78BEDE-6CAE-4F40-85D7-2552758F4EA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95FFD5FE-576D-4A07-88A8-87A4EFA6DB86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95FFD5FE-576D-4A07-88A8-87A4EFA6DB86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95FFD5FE-576D-4A07-88A8-87A4EFA6DB86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95FFD5FE-576D-4A07-88A8-87A4EFA6DB86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{387FBF1A-0A73-4978-985E-0E3A41574F13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{387FBF1A-0A73-4978-985E-0E3A41574F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{387FBF1A-0A73-4978-985E-0E3A41574F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{387FBF1A-0A73-4978-985E-0E3A41574F13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34E6FE4D-F44D-460F-90A6-EC7C69DEB9EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34E6FE4D-F44D-460F-90A6-EC7C69DEB9EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34E6FE4D-F44D-460F-90A6-EC7C69DEB9EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34E6FE4D-F44D-460F-90A6-EC7C69DEB9EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{7961DBAE-35FF-4D90-96DE-AAE83A593F85} = {A35C1FA3-7BE3-4C46-BA3A-FF0F4F130DF1}
-		{0F213AE2-0DF6-4386-9854-52CE3A238C72} = {792951D1-90F0-41C4-8D07-084ACED9DE61}
-		{1D78BEDE-6CAE-4F40-85D7-2552758F4EA0} = {0050BE96-391A-4E86-B6BD-F203274FC96C}
 	EndGlobalSection
 EndGlobal

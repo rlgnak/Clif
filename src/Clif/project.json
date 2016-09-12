@@ -1,16 +1,29 @@
-﻿{
-  "version": "0.0.1-*",
-  "description": "Clif Command Line Framework for DNX commands",
-  "authors": [ "rlgnak" ],
-  "tags": [ "dnx", "commands", "cli" ],
-  "projectUrl": "https://github.com/rlgnak/Clif",
-  "licenseUrl": "https://github.com/rlgnak/Clif/blob/master/LICENSE",
-  
-  "dependencies": {
+{
+  "version": "1.0.0-*",
 
+  "dependencies": {
+    "Microsoft.Extensions.DependencyInjection": "1.0.0",
+    "Microsoft.Extensions.DependencyModel": "1.0.0-*",
+    "NETStandard.Library": "1.6.0"
+  },
+
+  "buildOptions": {
+    "preserveCompilationContext": true,
+    "warningsAsErrors": true,
+    "define": [ "__DEMO__" ]
   },
 
   "frameworks": {
-    "dnx451": { }
+    "net451": {
+
+    },
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0",
+          "type": "platform"
+        }
+      }
+    }
   }
 }

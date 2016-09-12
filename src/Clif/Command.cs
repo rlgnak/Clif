@@ -1,142 +1,41 @@
 ﻿using System;
-using System.Linq;
-using Clif.Arguments;
-using Clif.Segments;
 
 namespace Clif
 {
+    /// <summary>
+    /// Defines the functionality for a command.
+    /// </summary>
     public class Command
     {
-        public string Route { get; set; }
-        public Action<dynamic, dynamic> Action { get; set; }
-
-        public Segment[] Arguments { get; set; }
-        public Segment[] Options { get; set; }
-
-        public Action<dynamic, dynamic> this[string command]
+        /// <summary>
+        /// Initialize a new instance of <see cref="Command"/> type.
+        /// </summary>
+        /// <param name="commandTemplate"></param>
+        /// <param name="action"></param>
+        public Command(string commandTemplate, Action<dynamic, dynamic> action)
         {
-            set
-            {
-                Action = value;
-                ParseCommand(command);
-            }
+            CommandRoute = new CommandRoute(commandTemplate);
+            Action = action;
         }
 
-        public CommandResult Match(string[] segments)
+        /// <summary>
+        /// The action that is excuted if the command is called.
+        /// </summary>
+        private Action<dynamic, dynamic> Action { get; }
+
+        /// <summary>
+        /// The route for this command.
+        /// </summary>
+        public CommandRoute CommandRoute { get; set; }
+
+        /// <summary>
+        /// Invokes the command with the provided <paramref name="parameters"/> and <paramref name="flags"/>
+        /// </summary>
+        /// <param name="parameters">Parameters</param>
+        /// <param name="flags">Flags</param>
+        public void Invoke(dynamic parameters, dynamic flags)
         {
-            var remaindingSegments = segments;
-            var finalCommandResult = new CommandResult(true);
-
-            //at a min there has to be enough segments
-            //some arguments have multiple segments
-            var argumentLength = Arguments.Sum(x => x.MatchSegments);
-            if (segments.Length < argumentLength)
-            {
-                return new CommandResult(false);
-            }
-            
-            var index = 0;
-            while (index < argumentLength)
-            {
-                var argumentMatcher = Arguments[index];
-                var matchedSegments = segments.Skip(index).Take(argumentMatcher.MatchSegments).ToArray();
-
-                var argumentResult = argumentMatcher.Match(matchedSegments);
-                //at any point if it doesn't match break early
-                if (!argumentResult.Matches)
-                {
-                    return new CommandResult(false);
-                }
-
-                //add the arguments
-                foreach (var argument in argumentResult.CapturedArguments)
-                {
-                    finalCommandResult.CapturedArguments.Add(argument);
-                }
-
-                index = index + argumentMatcher.MatchSegments;
-            }
-
-            //
-            while(index < segments.Length)
-            {
-                var matchFound = false;
-
-                foreach(var optionMatcher in Options)
-                {
-                    if (index + optionMatcher.MatchSegments > segments.Length)
-                    {
-                        continue;
-                    }
-
-                    var matchedSegments = segments.Skip(index).Take(optionMatcher.MatchSegments).ToArray();
-                    var optionResult = optionMatcher.Match(matchedSegments);
-
-                    if (!optionResult.Matches)
-                    {
-                        continue;
-                    }
-
-                    //add the arguments
-                    foreach (var option in optionResult.CapturedOptions)
-                    {
-                        finalCommandResult.CapturedOptions.Add(option);
-                    }
-
-                    index = index + optionMatcher.MatchSegments;
-                    matchFound = true;
-                    break;                  
-                }
-
-                if (!matchFound)
-                {
-                    return new CommandResult(false);
-                }
-            }
-
-            foreach (var optionMatcher in Options)
-            {
-                if (!finalCommandResult.CapturedOptions.ContainsKey(optionMatcher.Name))
-                {
-                    finalCommandResult.CapturedOptions.Add(optionMatcher.Name, optionMatcher.Default);
-                }                
-            }
-
-            return finalCommandResult;
-        }
-
-        private Segment ResolveArgument(string segment)
-        {
-            if (OptionSegment.SegmentRegex.Match(segment).Success)
-            {
-                return new OptionSegment(segment);
-            }
-            
-            if (OptionValueSegment.SegmentRegex.Match(segment).Success)
-            {
-                return new OptionValueSegment(segment);
-            }
-            
-            if (VariableArgument.SegmentRegex.Match(segment).Success)
-            {
-                return new VariableArgument(segment);
-            }
-
-            if (VariableArgument.SegmentRegex.Match(segment).Success)
-            {
-                return new VariableArgument(segment);
-            }
-
-            return new LiteralArgument(segment);
-        }
-
-        private void ParseCommand(string command)
-        {
-            var segments = command.Split(' ');
-            var commands = segments.Select(segment => ResolveArgument(segment)).ToArray();
-
-            Options = commands.Where(x => x.Type == 2).ToArray();
-            Arguments = commands.Where(x => x.Type == 1).ToArray();
+            Action.Invoke(parameters, flags);
         }
     }
 }

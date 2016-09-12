@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Clif.Abstract;
 
 namespace Clif
 {
     public class CommandResult
     {
-        public IDictionary<string, object> CapturedArguments { get; private set; } = new Dictionary<string, object>();
-        public IDictionary<string, object> CapturedOptions { get; private set; } = new Dictionary<string, object>();
+        public List<IMatchResult> MatchResults { get; set; }
 
-        public bool Matches { get; private set; }
-
-        public CommandResult(bool matches)
-        {
-            Matches = matches;
-        }
+        public List<IMatchResult> OptionalMatchResults { get; set; }
     }
 }

@@ -1,20 +1,23 @@
-﻿{
+{
   "version": "1.0.0-*",
-  "description": "Clif.Sample Console Application",
-  "authors": [ "rlgna" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
-
-  "commands": {
-    "Clif.Sample": "Clif.Sample"
+  "buildOptions": {
+    "preserveCompilationContext": true,
+    "emitEntryPoint": true
   },
 
   "dependencies": {
-    "Clif": "1.0.0-*"
+    "Clif": {
+     "target":"project" 
+    },
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.0"
+    }
   },
 
   "frameworks": {
-    "dnx451": { }
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
+    }
   }
 }

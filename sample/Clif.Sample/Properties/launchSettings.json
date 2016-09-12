@@ -1,8 +1,12 @@
 {
   "profiles": {
+    "sample": {
+      "commandName": "Project",
+      "commandLineArgs": "example"
+    },
     "Clif.Sample": {
-      "commandName": "Clif.Sample",
-      "sdkVersion": "dnx-clr-win-x86.1.0.0-beta7"
+      "commandName": "Project",
+      "commandLineArgs": "example"
     }
   }
 }
