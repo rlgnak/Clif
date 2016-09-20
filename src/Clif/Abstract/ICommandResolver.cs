@@ -2,8 +2,15 @@
 
 namespace Clif.Abstract
 {
+    /// <summary>
+    /// Basic class used to resolve commands
+    /// </summary>
     public interface ICommandResolver
     {
-        void Resolve(IEnumerable<string> command);
+        /// <summary>
+        /// Resolves a command given list of strings
+        /// </summary>
+        /// <param name="segments"></param>
+        void Resolve(IEnumerable<string> segments);
     }
 }

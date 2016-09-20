@@ -6,15 +6,26 @@ using Clif.MatchResults;
 
 namespace Clif
 {
+    /// <summary>
+    /// Basic class used to resolve commands
+    /// </summary>
     public class DefaultCommandResolver : ICommandResolver
     {
         private CommandCatalog Catalog { get; }
 
+        /// <summary>
+        /// Constructs a <see cref="DefaultCommandModuleResolver"/>
+        /// </summary>
+        /// <param name="catalog"></param>
         public DefaultCommandResolver(CommandCatalog catalog)
         {
             Catalog = catalog;
         }
 
+        /// <summary>
+        /// Resolves a command given list of strings
+        /// </summary>
+        /// <param name="segments"></param>
         public void Resolve(IEnumerable<string> segments)
         {
             var catalogEnumerator = Catalog.GetEnumerator();

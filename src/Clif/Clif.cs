@@ -19,8 +19,12 @@ namespace Clif
                 .Build();
         }
 
-        public ConsoleApplication ConsoleApplication { get; set; }
+        private ConsoleApplication ConsoleApplication { get; }
 
+        /// <summary>
+        /// Executes command based on provided args
+        /// </summary>
+        /// <param name="args"></param>
         public void Resolve(string[] args)
         {
             ConsoleApplication.Resolve(args);

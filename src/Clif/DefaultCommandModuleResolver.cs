@@ -8,10 +8,17 @@ using Microsoft.Extensions.DependencyModel;
 
 namespace Clif
 {
+    /// <summary>
+    /// Scans the current assempbly for classes that extend <see cref="CommandModule"/>
+    /// </summary>
     public class DefaultCommandModuleResolver : ICommandModuleResolver
     {
         private IServiceProvider ServiceProvider { get; }
 
+        /// <summary>
+        /// Constucts a <see cref="DefaultCommandModuleResolver"/>
+        /// </summary>
+        /// <param name="serviceProvider"></param>
         public DefaultCommandModuleResolver(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
@@ -25,6 +32,10 @@ namespace Clif
             return types.Where(x => x.GetTypeInfo().IsSubclassOf(typeof(CommandModule)));
         }
 
+        /// <summary>
+        /// Returns instance of all command modules resiger in the assembly
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<CommandModule> GetCommandModules()
         {
             var commands = new List<CommandModule>();

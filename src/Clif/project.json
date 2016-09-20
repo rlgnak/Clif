@@ -10,7 +10,8 @@
   "buildOptions": {
     "preserveCompilationContext": true,
     "warningsAsErrors": true,
-    "define": [ "__DEMO__" ]
+    "define": [ "__DEMO__" ],
+    "xmlDoc":  true 
   },
 
   "frameworks": {

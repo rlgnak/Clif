@@ -5,14 +5,19 @@ using Clif.MatchResults;
 namespace Clif.Segments
 {
     /// <summary>
+    /// A basic class for rpersenting a segment
     /// </summary>
     public class FlagSegment : ISegment, INamedSegment
     {
         private static readonly Regex FlagRegex = new Regex(@"^\[-(\w+)\|(\w+)\]$");
 
-        public FlagSegment(string piece)
+        /// <summary>
+        /// Constructs a <see cref="ConstantSegment"/>
+        /// </summary>
+        /// <param name="segmentText"></param>
+        public FlagSegment(string segmentText)
         {
-            var match = FlagRegex.Match(piece);
+            var match = FlagRegex.Match(segmentText);
             var flag = match.Groups[1].Value;
 
             Name = match.Groups[2].Value;
@@ -20,12 +25,20 @@ namespace Clif.Segments
             FlagVariableMatchRegex = new Regex($@"^-{flag} (\w+)$");
         }
 
-        public Regex FlagMatchRegex { get; set; }
+        private Regex FlagMatchRegex { get; }
 
-        public Regex FlagVariableMatchRegex { get; set; }
+        private Regex FlagVariableMatchRegex { get; }
 
+        /// <summary>
+        /// Segment name
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Determines if a string matches a segment
+        /// </summary>
+        /// <param name="piece"></param>
+        /// <returns></returns>
         public IMatchResult Match(string piece)
         {
             if (FlagMatchRegex.IsMatch(piece))

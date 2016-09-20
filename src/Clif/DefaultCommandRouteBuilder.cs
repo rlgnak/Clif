@@ -5,8 +5,15 @@ using Clif.Segments;
 
 namespace Clif
 {
+    /// <summary>
+    /// A basic class for parsing commands
+    /// </summary>
     public class DefaultCommandRouteBuilder : ICommandRouteBuilder
     {
+        /// <summary>
+        /// Parses a <see cref="CommandRoute"/> 
+        /// </summary>
+        /// <param name="commandRoute"></param>
         public void ParseRoute(CommandRoute commandRoute)
         {
             foreach (var segmentText in commandRoute.CommandTemplate.Split(' '))

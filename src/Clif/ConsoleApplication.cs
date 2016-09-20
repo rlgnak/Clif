@@ -3,6 +3,9 @@ using Clif.Abstract;
 
 namespace Clif
 {
+    /// <summary>
+    /// Repersents a configured console application
+    /// </summary>
     public class ConsoleApplication
     {
         private ICommandModuleResolver CommandModuleResolver { get; }
@@ -10,6 +13,13 @@ namespace Clif
         private CommandCatalog Catalog { get; }
         private ICommandResolver CommandResolver { get; }
 
+        /// <summary>
+        /// Constructs a <see cref="ConsoleApplication"/>
+        /// </summary>
+        /// <param name="commandModuleResolver"></param>
+        /// <param name="commandRouteBuilder"></param>
+        /// <param name="catalog"></param>
+        /// <param name="commandResolver"></param>
         public ConsoleApplication(ICommandModuleResolver commandModuleResolver, ICommandRouteBuilder commandRouteBuilder, CommandCatalog catalog, ICommandResolver commandResolver)
         {
             CommandModuleResolver = commandModuleResolver;
@@ -35,6 +45,10 @@ namespace Clif
             }
         }
 
+        /// <summary>
+        /// Executes command based on provided args
+        /// </summary>
+        /// <param name="args"></param>
         public void Resolve(string[] args)
         {
             CommandResolver.Resolve(args);
