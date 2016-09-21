@@ -9,14 +9,14 @@ using Microsoft.Extensions.DependencyModel;
 namespace Clif
 {
     /// <summary>
-    /// Scans the current assempbly for classes that extend <see cref="CommandModule"/>
+    /// Scans the current assembly for classes that extend <see cref="CommandModule"/>
     /// </summary>
     public class DefaultCommandModuleResolver : ICommandModuleResolver
     {
         private IServiceProvider ServiceProvider { get; }
 
         /// <summary>
-        /// Constucts a <see cref="DefaultCommandModuleResolver"/>
+        /// Constructs a <see cref="DefaultCommandModuleResolver"/>
         /// </summary>
         /// <param name="serviceProvider"></param>
         public DefaultCommandModuleResolver(IServiceProvider serviceProvider)
@@ -33,7 +33,7 @@ namespace Clif
         }
 
         /// <summary>
-        /// Returns instance of all command modules resiger in the assembly
+        /// Returns instance of all command modules registered in the assembly
         /// </summary>
         /// <returns></returns>
         public IEnumerable<CommandModule> GetCommandModules()

@@ -13,13 +13,17 @@ namespace Clif
     {
         private CommandCatalog Catalog { get; }
 
+        private ICommandInvoker CommandInvoker { get; }
+
         /// <summary>
         /// Constructs a <see cref="DefaultCommandModuleResolver"/>
         /// </summary>
         /// <param name="catalog"></param>
-        public DefaultCommandResolver(CommandCatalog catalog)
+        /// <param name="commandInvoker"></param>
+        public DefaultCommandResolver(CommandCatalog catalog, ICommandInvoker commandInvoker)
         {
             Catalog = catalog;
+            CommandInvoker = commandInvoker;
         }
 
         /// <summary>
@@ -49,29 +53,8 @@ namespace Clif
                     throw new Exception("Command Not Found");
                 }
 
-                var flags = ListResultsToExpando(commandResult.OptionalMatchResults);
-                var paramters = ListResultsToExpando(commandResult.MatchResults);
-
-                catalogEnumerator.Current.Invoke(paramters, flags);
+                CommandInvoker.Invoke(commandResult, catalogEnumerator.Current);
             }
-        }
-        
-        private static ExpandoObject ListResultsToExpando(IEnumerable<IMatchResult> matchResults)
-        {
-            var expando = new ExpandoObject();
-            var expandoDictionary = (ICollection<KeyValuePair<string, object>>)expando;
-
-            foreach (var matchResult in matchResults)
-            {
-                if (matchResult is NamedValueMatchResult)
-                {
-                    var nameValueMatchResult = matchResult as NamedValueMatchResult;
-                    expandoDictionary.Add(new KeyValuePair<string, object>(nameValueMatchResult.Name,
-                        nameValueMatchResult.Value));
-                }
-            }
-
-            return expando;
         }
     }
 }
