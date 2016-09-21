@@ -15,7 +15,7 @@ namespace Clif
         /// </summary>
         /// <param name="commandResult"></param>
         /// <param name="command"></param>
-        public void Invoke(CommandResult commandResult, Command command)
+        public void Invoke(CommandResult commandResult, ICommand command)
         {
             var flags = ListResultsToExpando(commandResult.OptionalMatchResults);
             var paramters = ListResultsToExpando(commandResult.MatchResults);

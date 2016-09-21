@@ -1,20 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Clif.Abstract;
 
 namespace Clif
 {
     /// <summary>
-    /// 
+    /// A basic class that represents a collection of <see cref="ICommand"/>
     /// </summary>
-    public class CommandCatalog : IEnumerable<Command>
+    public class CommandCatalog : ICommandCatalog
     {
-        private List<Command> Catalog { get; } = new List<Command>();
+        private List<ICommand> Catalog { get; } = new List<ICommand>();
 
         /// <summary>
         /// Gets enumerator.
         /// </summary>
         /// <returns></returns>
-        public IEnumerator<Command> GetEnumerator()
+        public IEnumerator<ICommand> GetEnumerator()
         {
             return Catalog.GetEnumerator();
         }

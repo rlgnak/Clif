@@ -11,7 +11,7 @@ namespace Clif
     /// </summary>
     public class DefaultCommandResolver : ICommandResolver
     {
-        private CommandCatalog Catalog { get; }
+        private ICommandCatalog Catalog { get; }
 
         private ICommandInvoker CommandInvoker { get; }
 
@@ -20,7 +20,7 @@ namespace Clif
         /// </summary>
         /// <param name="catalog"></param>
         /// <param name="commandInvoker"></param>
-        public DefaultCommandResolver(CommandCatalog catalog, ICommandInvoker commandInvoker)
+        public DefaultCommandResolver(ICommandCatalog catalog, ICommandInvoker commandInvoker)
         {
             Catalog = catalog;
             CommandInvoker = commandInvoker;
@@ -40,7 +40,7 @@ namespace Clif
 
                 while (catalogEnumerator.MoveNext())
                 {
-                    commandResult = catalogEnumerator.Current.CommandRoute.Match(segments);
+                    commandResult = catalogEnumerator.Current.Match(segments);
 
                     if (commandResult != null)
                     {

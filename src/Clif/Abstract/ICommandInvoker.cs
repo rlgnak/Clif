@@ -10,6 +10,6 @@
         /// </summary>
         /// <param name="commandResult"></param>
         /// <param name="command"></param>
-        void Invoke(CommandResult commandResult, Command command);
+        void Invoke(CommandResult commandResult, ICommand command);
     }
 }

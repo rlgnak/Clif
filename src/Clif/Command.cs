@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using Clif.Abstract;
 
 namespace Clif
 {
     /// <summary>
     /// Defines the functionality for a command.
     /// </summary>
-    public class Command
+    public class Command : ICommand
     {
         /// <summary>
         /// Initialize a new instance of <see cref="Command"/> type.
@@ -36,6 +38,16 @@ namespace Clif
         public void Invoke(dynamic parameters, dynamic flags)
         {
             Action.Invoke(parameters, flags);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="segments"></param>
+        /// <returns></returns>
+        public CommandResult Match(IEnumerable<string> segments)
+        {
+            return CommandRoute.Match(segments);
         }
     }
 }
