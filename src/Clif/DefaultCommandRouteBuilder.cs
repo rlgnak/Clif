@@ -11,10 +11,10 @@ namespace Clif
     public class DefaultCommandRouteBuilder : ICommandRouteBuilder
     {
         /// <summary>
-        /// Parses a <see cref="CommandRoute"/> 
+        /// Parses a <see cref="ICommandRoute"/> 
         /// </summary>
         /// <param name="commandRoute"></param>
-        public void ParseRoute(CommandRoute commandRoute)
+        public void ParseRoute(ICommandRoute commandRoute)
         {
             foreach (var segmentText in commandRoute.CommandTemplate.Split(' '))
             {

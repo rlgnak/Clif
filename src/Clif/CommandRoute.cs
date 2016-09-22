@@ -5,12 +5,12 @@ using Clif.Abstract;
 namespace Clif
 {
     /// <summary>
-    /// Stores information about the declared route
+    ///     Stores information about the declared route
     /// </summary>
-    public class CommandRoute
+    public class CommandRoute : ICommandRoute
     {
         /// <summary>
-        /// Initalizes a new instance of <see cref="CommandRoute"/>
+        ///     Initializes a new instance of <see cref="CommandRoute" />
         /// </summary>
         /// <param name="commandTemplate"></param>
         public CommandRoute(string commandTemplate)
@@ -24,22 +24,22 @@ namespace Clif
         }
 
         /// <summary>
-        /// The template regiester for this command
+        ///     The template register for this command
         /// </summary>
         public string CommandTemplate { get; set; }
 
         /// <summary>
-        /// The list of segments
+        ///     The list of segments
         /// </summary>
         private List<ISegment> Segments { get; } = new List<ISegment>();
 
         /// <summary>
-        /// The list of optional segments
+        ///     The list of optional segments
         /// </summary>
         private List<ISegment> OptionalSegments { get; } = new List<ISegment>();
 
         /// <summary>
-        /// Adds a segment to this <see cref="CommandRoute"/>
+        ///     Adds a segment to this <see cref="CommandRoute" />
         /// </summary>
         /// <param name="segment"></param>
         public void AddSegment(ISegment segment)
@@ -48,7 +48,7 @@ namespace Clif
         }
 
         /// <summary>
-        /// Adds an optional segment to this <see cref="CommandRoute"/>
+        ///     Adds an optional segment to this <see cref="CommandRoute" />
         /// </summary>
         /// <param name="segment"></param>
         public void AddOptionalSegment(ISegment segment)
@@ -57,12 +57,12 @@ namespace Clif
         }
 
         /// <summary>
-        /// Checks if this <see cref="CommandRoute"/> matches the 
-        /// provided <paramref name="command"/>.
+        ///     Checks if this <see cref="CommandRoute" /> matches the
+        ///     provided <paramref name="command" />.
         /// </summary>
         /// <param name="command"></param>
         /// <returns>
-        /// <see cref="CommandResult"/> if it matches otherwise it returns null.
+        ///     <see cref="CommandResult" /> if it matches otherwise it returns null.
         /// </returns>
         public CommandResult Match(IEnumerable<string> command)
         {
@@ -93,7 +93,7 @@ namespace Clif
                         results.Add(match);
                     }
                 }
-                
+
                 while (commandEnumerator.MoveNext())
                 {
                     IMatchResult result = null;

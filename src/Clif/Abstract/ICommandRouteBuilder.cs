@@ -6,9 +6,9 @@
     public interface ICommandRouteBuilder
     {
         /// <summary>
-        /// Parses a <see cref="CommandRoute"/> 
+        /// Parses a <see cref="ICommandRoute"/> 
         /// </summary>
         /// <param name="commandRoute"></param>
-        void ParseRoute(CommandRoute commandRoute);
+        void ParseRoute(ICommandRoute commandRoute);
     }
 }
