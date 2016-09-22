@@ -23,6 +23,6 @@ install:
   - nuget install OpenCover -ExcludeVersion  
   - nuget install coveralls.io -ExcludeVersion  
 test_script:
-  - OpenCover\tools\OpenCover.Console.exe -register:user -filter:"+[Clif*]*" -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test test\Clif.Tests -appveyor" -output:coverage.xml   
+  - OpenCover\tools\OpenCover.Console.exe -register:user -filter:"-[Clif.Tests*]* +[Clif*]*" -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test test\Clif.Tests -appveyor" -output:coverage.xml   
 after_test: 
   - coveralls.io\tools\coveralls.net.exe --opencover coverage.xml
