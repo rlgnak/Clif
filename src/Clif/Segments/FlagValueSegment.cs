@@ -5,9 +5,9 @@ using Clif.MatchResults;
 namespace Clif.Segments
 {
     /// <summary>
-    /// A basic class for representing a segment
+    /// A basic class for representing a segment match
     /// </summary>
-    public class FlagSegment : ISegment, INamedSegment
+    public class FlagValueSegment : ISegment, INamedSegment
     {
         private static readonly Regex FlagRegex = new Regex(@"^\[-(\w+)\|(\w+)\]$");
 
@@ -15,17 +15,14 @@ namespace Clif.Segments
         /// Constructs a <see cref="ConstantSegment"/>
         /// </summary>
         /// <param name="segmentText"></param>
-        public FlagSegment(string segmentText)
+        public FlagValueSegment(string segmentText)
         {
             var match = FlagRegex.Match(segmentText);
             var flag = match.Groups[1].Value;
 
             Name = match.Groups[2].Value;
-            FlagMatchRegex = new Regex($@"^-{flag}$");
             FlagVariableMatchRegex = new Regex($@"^-{flag} (\w+)$");
         }
-
-        private Regex FlagMatchRegex { get; }
 
         private Regex FlagVariableMatchRegex { get; }
 
@@ -41,11 +38,6 @@ namespace Clif.Segments
         /// <returns></returns>
         public IMatchResult Match(string piece)
         {
-            if (FlagMatchRegex.IsMatch(piece))
-            {
-                return new NamedValueMatchResult(Name, true);
-            }
-
             if (FlagVariableMatchRegex.IsMatch(piece))
             {
                 return new NamedValueMatchResult(Name, "value");

@@ -4,7 +4,6 @@ using Clif.Abstract;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyModel;
 
 namespace Clif
 {
@@ -14,22 +13,23 @@ namespace Clif
     public class DefaultCommandModuleResolver : ICommandModuleResolver
     {
         private IServiceProvider ServiceProvider { get; }
+        private IAssemblyCatalog AssemblyCatalog { get; set; }
 
         /// <summary>
         /// Constructs a <see cref="DefaultCommandModuleResolver"/>
         /// </summary>
         /// <param name="serviceProvider"></param>
-        public DefaultCommandModuleResolver(IServiceProvider serviceProvider)
+        /// <param name="assemblyCatalog"></param>
+        public DefaultCommandModuleResolver(IServiceProvider serviceProvider, IAssemblyCatalog assemblyCatalog)
         {
             ServiceProvider = serviceProvider;
+            AssemblyCatalog = assemblyCatalog;
         }
 
-        private static IEnumerable<Type> GetModules()
+        private IEnumerable<Type> GetModules()
         {
-            var assemblyNames = DependencyContext.Default.GetDefaultAssemblyNames();
-            var assemblies = assemblyNames.Select(info => Assembly.Load(new AssemblyName(info.Name)));
-            var types = assemblies.SelectMany(x => x.GetTypes());
-            return types.Where(x => x.GetTypeInfo().IsSubclassOf(typeof(CommandModule)));
+            var types = AssemblyCatalog.GetAssemblies().SelectMany(x => x.GetTypes());
+            return types.Where(x => x.GetTypeInfo().IsClass && !x.GetTypeInfo().IsAbstract && x.GetTypeInfo().IsSubclassOf(typeof(CommandModule)));
         }
 
         /// <summary>

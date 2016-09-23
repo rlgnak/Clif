@@ -5,7 +5,7 @@ using Clif.MatchResults;
 namespace Clif.Segments
 {
     /// <summary>
-    /// A basic class for rpersenting a segment match
+    /// A basic class for representing a segment match
     /// </summary>
     public class ConstantSegment : ISegment
     {

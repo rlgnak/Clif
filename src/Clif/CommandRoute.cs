@@ -24,11 +24,6 @@ namespace Clif
         }
 
         /// <summary>
-        ///     The template register for this command
-        /// </summary>
-        public string CommandTemplate { get; set; }
-
-        /// <summary>
         ///     The list of segments
         /// </summary>
         private List<ISegment> Segments { get; } = new List<ISegment>();
@@ -37,6 +32,11 @@ namespace Clif
         ///     The list of optional segments
         /// </summary>
         private List<ISegment> OptionalSegments { get; } = new List<ISegment>();
+
+        /// <summary>
+        ///     The template register for this command
+        /// </summary>
+        public string CommandTemplate { get; set; }
 
         /// <summary>
         ///     Adds a segment to this <see cref="CommandRoute" />
@@ -69,7 +69,7 @@ namespace Clif
             var results = new List<IMatchResult>();
             var optionalResults = new List<IMatchResult>();
 
-            var commandEnumerator = command.GetEnumerator();
+            var commandEnumerator = ListToPairList(command).GetEnumerator();
             var segmentEnumerator = Segments.GetEnumerator();
 
             using (commandEnumerator)
@@ -84,7 +84,7 @@ namespace Clif
                             return null;
                         }
 
-                        var match = segmentEnumerator.Current?.Match(commandEnumerator.Current);
+                        var match = segmentEnumerator.Current?.Match(commandEnumerator.Current.Item1);
 
                         if (match == null)
                         {
@@ -96,10 +96,24 @@ namespace Clif
 
                 while (commandEnumerator.MoveNext())
                 {
+                    var current = commandEnumerator.Current;
+
                     IMatchResult result = null;
                     foreach (var optionalSegment in OptionalSegments)
                     {
-                        result = optionalSegment.Match(commandEnumerator.Current);
+                        //verify this isn't the last piece
+                        if (current.Item2 != null)
+                        {
+                            result = optionalSegment.Match($"{current.Item1} {current.Item2}");
+                            if (result != null)
+                            {
+                                //skip ahead by one because we matched both the current and next command piece
+                                commandEnumerator.MoveNext();
+                                break;
+                            }
+                        }
+
+                        result = optionalSegment.Match(current.Item1);
                         if (result != null)
                         {
                             break;
@@ -120,6 +134,27 @@ namespace Clif
                 MatchResults = results,
                 OptionalMatchResults = optionalResults
             };
+        }
+
+        private IEnumerable<Tuple<string, string>> ListToPairList(IEnumerable<string> list)
+        {
+            using (var enumerator = list.GetEnumerator())
+            {
+                if (!enumerator.MoveNext())
+                {
+                    yield break;
+                }
+
+                var current = enumerator.Current;
+                while (enumerator.MoveNext())
+                {
+                    var previous = current;
+                    current = enumerator.Current;
+                    yield return Tuple.Create(previous, current);
+                }
+
+                yield return Tuple.Create(current, default(string));
+            }
         }
     }
 }

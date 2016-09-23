@@ -18,49 +18,27 @@ namespace Clif
         {
             foreach (var segmentText in commandRoute.CommandTemplate.Split(' '))
             {
-                var segment = GetSegment(segmentText);
-
-                if (segment != null)
+                if (new Regex(@"^\w+$").IsMatch(segmentText))
                 {
-                    commandRoute.AddSegment(segment);
+                    commandRoute.AddSegment(new ConstantSegment(segmentText));
                     continue;
                 }
 
-                var optionalSegment = GetOptionalSegment(segmentText);
-
-                if (optionalSegment != null)
+                if (new Regex(@"^{\w+}$").IsMatch(segmentText))
                 {
-                    commandRoute.AddOptionalSegment(optionalSegment);
+                    commandRoute.AddSegment(new VariableSegement(segmentText));
+                    continue;
+                }
+
+                if (new Regex(@"^\[-\w+\|\w+\]$").IsMatch(segmentText))
+                {
+                    commandRoute.AddOptionalSegment(new FlagValueSegment(segmentText));
+                    commandRoute.AddOptionalSegment(new FlagSegment(segmentText));
                     continue;
                 }
 
                 throw new Exception($"Invalid route detected {commandRoute.CommandTemplate}");
             }
-        }
-
-        private ISegment GetSegment(string segmentText)
-        {
-            if (new Regex(@"^\w+$").IsMatch(segmentText))
-            {
-                return new ConstantSegment(segmentText);
-            }
-
-            if (new Regex(@"^{\w+}$").IsMatch(segmentText))
-            {
-                return new VariableSegement(segmentText);
-            }
-
-            return null;
-        }
-
-        private ISegment GetOptionalSegment(string segmentText)
-        {
-            if (new Regex(@"^\[-\w+\|\w+\]$").IsMatch(segmentText))
-            {
-                return new FlagSegment(segmentText);
-            }
-
-            return null;
         }
     }
 }

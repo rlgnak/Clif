@@ -1,7 +1,7 @@
 ﻿namespace Clif.Abstract
 {
     /// <summary>
-    /// A basic class for rpersenting a segment
+    /// A basic class for representing a segment
     /// </summary>
     public interface ISegment
     {
