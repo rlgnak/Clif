@@ -9,6 +9,54 @@ namespace Clif.Tests
     public class CommandRouteTests
     {
         [Fact]
+        public void Should_throw_exception_when_using_blank_template()
+        {
+            Assert.Throws<ArgumentException>(() => {
+                var route = new CommandRoute("");
+            });
+        }
+
+        [Fact]
+        public void Should_return_null_if_segment_doesnt_match()
+        {
+            var command = "test".Split(' ');
+            var commandRoute = new CommandRoute("test");
+
+            var matchResult = new MatchResult();
+            var mockSegment = new Mock<ISegment>();
+
+            mockSegment.Setup(x => x.Match("baaad")).Returns(() => matchResult);
+
+            commandRoute.AddSegment(mockSegment.Object);
+
+            var result = commandRoute.Match(command);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void Should_return_null_if_optional_segment_doesnt_match()
+        {
+            var command = "test -f".Split(' ');
+            var commandRoute = new CommandRoute("test [-f|flag]");
+
+            var matchResult = new MatchResult();
+            var namedMatchResult = new NamedValueMatchResult("flag", true);
+            var mockSegment = new Mock<ISegment>();
+            var mockOptionalSegment = new Mock<ISegment>();
+
+            mockSegment.Setup(x => x.Match("test")).Returns(() => matchResult);
+            mockOptionalSegment.Setup(x => x.Match("-o")).Returns(() => namedMatchResult);
+
+            commandRoute.AddSegment(mockSegment.Object);
+            commandRoute.AddOptionalSegment(mockOptionalSegment.Object);
+
+            var result = commandRoute.Match(command);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
         public void Should_match_segment()
         {
             var command = "test".Split(' ');
