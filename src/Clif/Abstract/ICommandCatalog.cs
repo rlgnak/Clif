@@ -7,6 +7,10 @@ namespace Clif.Abstract
     /// </summary>
     public interface ICommandCatalog : IEnumerable<ICommand>
     {
-        
+        /// <summary>
+        /// Adds a module to the <see cref="ICommandCatalog"/>
+        /// </summary>
+        /// <param name="module"></param>
+        void AddModule(CommandModule module);
     }
 }

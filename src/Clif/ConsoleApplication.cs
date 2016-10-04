@@ -10,7 +10,7 @@ namespace Clif
     {
         private ICommandModuleResolver CommandModuleResolver { get; }
         private ICommandRouteBuilder CommandRouteBuilder { get; }
-        private CommandCatalog Catalog { get; }
+        private ICommandCatalog Catalog { get; }
         private ICommandResolver CommandResolver { get; }
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace Clif
         /// <param name="commandRouteBuilder"></param>
         /// <param name="catalog"></param>
         /// <param name="commandResolver"></param>
-        public ConsoleApplication(ICommandModuleResolver commandModuleResolver, ICommandRouteBuilder commandRouteBuilder, CommandCatalog catalog, ICommandResolver commandResolver)
+        public ConsoleApplication(ICommandModuleResolver commandModuleResolver, ICommandRouteBuilder commandRouteBuilder, ICommandCatalog catalog, ICommandResolver commandResolver)
         {
             CommandModuleResolver = commandModuleResolver;
             CommandRouteBuilder = commandRouteBuilder;
