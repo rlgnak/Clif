@@ -10,7 +10,7 @@ Clif is a framework for creating command line applications
 [![Coverage Status](https://coveralls.io/repos/github/rlgnak/Clif/badge.svg?branch=master)](https://coveralls.io/github/rlgnak/Clif?branch=master)
 
 ```csharp
-public class Module : CommandMoudle
+public class Module : CommandModule
 {
 	public Module()
 	{
