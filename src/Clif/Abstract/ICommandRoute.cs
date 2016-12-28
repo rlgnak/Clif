@@ -17,7 +17,7 @@ namespace Clif.Abstract
         ///     Adds an optional segment to this <see cref="CommandRoute" />
         /// </summary>
         /// <param name="segment"></param>
-        void AddOptionalSegment(ISegment segment);
+        void AddOptionalSegment(INamedSegment segment);
 
         /// <summary>
         ///     Checks if this <see cref="CommandRoute" /> matches the

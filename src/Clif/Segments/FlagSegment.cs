@@ -7,7 +7,7 @@ namespace Clif.Segments
     /// <summary>
     /// A basic class for representing a segment
     /// </summary>
-    public class FlagSegment : ISegment, INamedSegment
+    public class FlagSegment : INamedSegment
     {
         private static readonly Regex FlagRegex = new Regex(@"^\[-(\w+)\|(\w+)\]$");
 

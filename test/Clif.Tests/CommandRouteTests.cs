@@ -43,7 +43,7 @@ namespace Clif.Tests
             var matchResult = new MatchResult();
             var namedMatchResult = new NamedValueMatchResult("flag", true);
             var mockSegment = new Mock<ISegment>();
-            var mockOptionalSegment = new Mock<ISegment>();
+            var mockOptionalSegment = new Mock<INamedSegment>();
 
             mockSegment.Setup(x => x.Match("test")).Returns(() => matchResult);
             mockOptionalSegment.Setup(x => x.Match("-o")).Returns(() => namedMatchResult);
@@ -112,9 +112,10 @@ namespace Clif.Tests
             var matchResult = new MatchResult();
             var namedMatchResult = new NamedValueMatchResult("flag", true);
             var mockSegment = new Mock<ISegment>();
-            var mockOptionalSegment = new Mock<ISegment>();
+            var mockOptionalSegment = new Mock<INamedSegment>();
 
             mockSegment.Setup(x => x.Match("test")).Returns(() => matchResult);
+            mockOptionalSegment.Setup(x => x.Name).Returns("flag");
             mockOptionalSegment.Setup(x => x.Match("-f")).Returns(() => namedMatchResult);
 
             commandRoute.AddSegment(mockSegment.Object);
@@ -138,9 +139,10 @@ namespace Clif.Tests
             var matchResult = new MatchResult();
             var namedMatchResult = new NamedValueMatchResult("flag", "test");
             var mockSegment = new Mock<ISegment>();
-            var mockOptionalSegment = new Mock<ISegment>();
+            var mockOptionalSegment = new Mock<INamedSegment>();
 
             mockSegment.Setup(x => x.Match("test")).Returns(() => matchResult);
+            mockOptionalSegment.Setup(x => x.Name).Returns("flag");
             mockOptionalSegment.Setup(x => x.Match("-f test")).Returns(() => namedMatchResult);
 
             commandRoute.AddSegment(mockSegment.Object);

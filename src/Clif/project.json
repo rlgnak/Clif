@@ -1,6 +1,5 @@
 {
-  "version": "1.0.0-*",
-
+  "version": "0.2.0",
   "dependencies": {
     "Microsoft.AspNetCore.Hosting": "1.0.0",
     "Microsoft.Extensions.DependencyInjection": "1.0.0",
@@ -12,7 +11,7 @@
     "preserveCompilationContext": true,
     "warningsAsErrors": true,
     "define": [ "__DEMO__" ],
-    "xmlDoc":  true 
+    "xmlDoc": true
   },
 
   "frameworks": {

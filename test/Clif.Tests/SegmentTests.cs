@@ -59,6 +59,8 @@ namespace Clif.Tests
         [InlineData("{bob}", "123")]
         [InlineData("{bob}", "123squiggle")]
         [InlineData("{bob}", "squiggle123")]
+        [InlineData("{bob}", "squiggle-123")]
+        [InlineData("{bob}", "squiggle_123")]
         public void should_match_variable_segment(string segmentText, string commandText)
         {
             var segment = new VariableSegement(segmentText);

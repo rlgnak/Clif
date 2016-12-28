@@ -7,7 +7,7 @@ namespace Clif.Segments
     /// <summary>
     /// A basic class for representing a segment match
     /// </summary>
-    public class FlagValueSegment : ISegment, INamedSegment
+    public class FlagValueSegment : INamedSegment
     {
         private static readonly Regex FlagRegex = new Regex(@"^\[-(\w+)\|(\w+)\]$");
 
@@ -40,7 +40,7 @@ namespace Clif.Segments
         {
             if (FlagVariableMatchRegex.IsMatch(piece))
             {
-                return new NamedValueMatchResult(Name, "value");
+                return new NamedValueMatchResult(Name, piece.Substring(piece.IndexOf(" ")));
             }
 
             return null;

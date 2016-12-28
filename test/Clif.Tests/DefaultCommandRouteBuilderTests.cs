@@ -24,7 +24,7 @@ namespace Clif.Tests
             
             commandRouteBuilder.ParseRoute(mockCommandRoute.Object);
 
-            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<ISegment>()), Times.Never);
+            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<INamedSegment>()), Times.Never);
             mockCommandRoute.Verify(x => x.AddSegment(It.IsAny<ISegment>()), Times.Once);
             mockCommandRoute.Verify(x => x.AddSegment(It.IsAny<ConstantSegment>()), Times.Once);
         }
@@ -40,7 +40,7 @@ namespace Clif.Tests
 
             commandRouteBuilder.ParseRoute(mockCommandRoute.Object);
 
-            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<ISegment>()), Times.Never);
+            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<INamedSegment>()), Times.Never);
             mockCommandRoute.Verify(x => x.AddSegment(It.IsAny<ISegment>()), Times.Exactly(1));
             mockCommandRoute.Verify(x => x.AddSegment(It.IsAny<VariableSegement>()), Times.Once);
         }
@@ -58,7 +58,7 @@ namespace Clif.Tests
 
             commandRouteBuilder.ParseRoute(mockCommandRoute.Object);
 
-            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<ISegment>()), Times.Never);
+            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<INamedSegment>()), Times.Never);
             mockCommandRoute.Verify(x => x.AddSegment(It.IsAny<ISegment>()), Times.Exactly(2));
             mockCommandRoute.Verify(x => x.AddSegment(It.IsAny<ConstantSegment>()), Times.Once);
             mockCommandRoute.Verify(x => x.AddSegment(It.IsAny<VariableSegement>()), Times.Once);
@@ -77,7 +77,7 @@ namespace Clif.Tests
 
             commandRouteBuilder.ParseRoute(mockCommandRoute.Object);
 
-            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<ISegment>()), Times.Exactly(2));
+            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<INamedSegment>()), Times.Exactly(2));
             mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<FlagSegment>()), Times.Once);
             mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<FlagValueSegment>()), Times.Once);
             mockCommandRoute.Verify(x => x.AddSegment(It.IsAny<ISegment>()), Times.Once);
@@ -97,7 +97,7 @@ namespace Clif.Tests
 
             commandRouteBuilder.ParseRoute(mockCommandRoute.Object);
 
-            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<ISegment>()), Times.Exactly(2));
+            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<INamedSegment>()), Times.Exactly(2));
             mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<FlagSegment>()), Times.Once);
             mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<FlagValueSegment>()), Times.Once);
             mockCommandRoute.Verify(x => x.AddSegment(It.IsAny<ISegment>()), Times.Exactly(2));
@@ -130,7 +130,7 @@ namespace Clif.Tests
 
             commandRouteBuilder.ParseRoute(mockCommandRoute.Object);
 
-            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<ISegment>()), Times.Exactly(flagCount * 2));
+            mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<INamedSegment>()), Times.Exactly(flagCount * 2));
             mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<FlagSegment>()), Times.Exactly(flagCount));
             mockCommandRoute.Verify(x => x.AddOptionalSegment(It.IsAny<FlagValueSegment>()), Times.Exactly(flagCount));
             mockCommandRoute.Verify(x => x.AddSegment(It.IsAny<ISegment>()), Times.Exactly(variableCount + constantCount));

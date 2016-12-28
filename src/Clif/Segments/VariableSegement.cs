@@ -7,10 +7,10 @@ namespace Clif.Segments
     /// <summary>
     /// A basic class for rpersenting a segment
     /// </summary>
-    public class VariableSegement : ISegment, INamedSegment
+    public class VariableSegement : INamedSegment
     {
         private static readonly Regex VairbaleRegex = new Regex(@"^\{(\w+)\}$");
-        private static readonly Regex MatchRegex = new Regex(@"^\w+$");
+        private static readonly Regex MatchRegex = new Regex(@"^\w(.*)$");
 
         /// <summary>
         /// Constructs a <see cref="VariableSegement"/>

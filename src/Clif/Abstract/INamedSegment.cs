@@ -3,7 +3,7 @@
     /// <summary>
     /// A Interface for name segements
     /// </summary>
-    internal interface INamedSegment
+    public interface INamedSegment : ISegment
     {
         /// <summary>
         /// The name of a segment

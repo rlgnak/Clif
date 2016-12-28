@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Clif.Abstract;
+using Clif.MatchResults;
 
 namespace Clif
 {
@@ -31,7 +33,7 @@ namespace Clif
         /// <summary>
         ///     The list of optional segments
         /// </summary>
-        private List<ISegment> OptionalSegments { get; } = new List<ISegment>();
+        private List<INamedSegment> OptionalSegments { get; } = new List<INamedSegment>();
 
         /// <summary>
         ///     The template register for this command
@@ -51,7 +53,7 @@ namespace Clif
         ///     Adds an optional segment to this <see cref="CommandRoute" />
         /// </summary>
         /// <param name="segment"></param>
-        public void AddOptionalSegment(ISegment segment)
+        public void AddOptionalSegment(INamedSegment segment)
         {
             OptionalSegments.Add(segment);
         }
@@ -127,6 +129,16 @@ namespace Clif
 
                     optionalResults.Add(result);
                 }
+
+                //add all missing optional segments with null values
+                foreach (var optionalSegment in OptionalSegments)
+                {
+                    if (optionalResults.All(x => (x as NamedValueMatchResult)?.Name != optionalSegment.Name))
+                    {
+                        optionalResults.Add(new NamedValueMatchResult(optionalSegment.Name, null));
+                    }
+                }
+
             }
 
             return new CommandResult

@@ -48,11 +48,9 @@ namespace Clif
             services.AddSingleton<ICommandResolver, DefaultCommandResolver>();
             services.AddSingleton<ICommandModuleResolver, DefaultCommandModuleResolver>();
             services.AddSingleton<ICommandInvoker, DefaultCommandInvoker>();
-
-            StartupMethods?.ConfigureServicesDelegate(services);
-
-            var serviceProvider = services.BuildServiceProvider();
-
+           
+            var serviceProvider = StartupMethods?.ConfigureServicesDelegate(services) ?? services.BuildServiceProvider();
+            
             return ActivatorUtilities.CreateInstance<ConsoleApplication>(serviceProvider);
         }
     }
